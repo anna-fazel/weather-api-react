@@ -8,6 +8,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [showTemp, setShowTemp] = useState();
   const [showHum, setShowHum] = useState();
+  
 
   const url = `http://api.weatherapi.com/v1/forecast.json?key=c717ab506269416bab9231151220103&q=${searchResult}&days=10&aqi=yes&alerts=no`;
   const { data } = useRequest(url);
@@ -18,11 +19,12 @@ function App() {
     setSearch("");
   };
 
+  
   return (
     <div className="app">
       <h2 className="title">Weather App</h2>
       <div className="search">
-        <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit}>
           <input
             className="search-box"
             type="text"
@@ -47,6 +49,7 @@ function App() {
             name="hum"
             onChange={() => setShowHum(!showHum)}
           />
+          
         </form>
       </div>
 
@@ -54,29 +57,33 @@ function App() {
         <>
           <h3 className="title">Current Weather</h3>
           <div className="result box-shadow">
-            <img
-              src={data.current.condition.icon}
-              alt={data.current.condition.text}
-            />
-            <h5>{data.current.condition.text}</h5>
-            <h3>
-              {data.location.name}, {data.location.country}
-            </h3>
-            {showTemp ? (
-              <div className="temp">
-                {data.current ? (
-                  <h4>Tempreture {data.current.temp_c}&deg;c</h4>
-                ) : null}
-              </div>
-            ) : null}
-            {showHum ? (
-              <div className="humidity">
-                {data.current ? (
-                  <h4>Humidity {data.current.humidity}%</h4>
-                ) : null}
-              </div>
-            ) : null}
-          </div>
+          
+              <img
+                src={data.current.condition.icon}
+                alt={data.current.condition.text}
+              />
+              <h5>{data.current.condition.text}</h5>
+                     <h3>
+                {data.location.name}, {data.location.country}
+              </h3>
+
+              {showTemp ? (
+                <div className="temp">
+                  {data.current ? (
+                    <h4>Tempreture {data.current.temp_c}&deg;c</h4>
+                  ) : null}
+                </div>
+              ) : null}
+
+              {showHum ? (
+                <div className="humidity">
+                  {data.current ? (
+                    <h4>Humidity {data.current.humidity}%</h4>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          
 
           <Forecast data={data.forecast} />
         </>
