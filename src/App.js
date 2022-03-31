@@ -10,7 +10,7 @@ function App() {
   const [showHum, setShowHum] = useState();
   
 
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=c717ab506269416bab9231151220103&q=${searchResult}&days=10&aqi=yes&alerts=no`;
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${searchResult}&days=10&aqi=yes&alerts=no`;
   const { data } = useRequest(url);
 
   const onSubmit = (e) => {
